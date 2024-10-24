@@ -10,7 +10,7 @@ import Foundation
 
 class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = []
-    @Published var error: Error?
+    @Published var error: IdentifiableError?
 
     private let service: MoviesServicing
 
@@ -25,7 +25,7 @@ class MoviesViewModel: ObservableObject {
                 case .success(let movieResponse):
                     self?.movies = movieResponse.results
                 case .failure(let error):
-                    self?.error = error
+                    self?.error?.error = error
                 }
             }
         }

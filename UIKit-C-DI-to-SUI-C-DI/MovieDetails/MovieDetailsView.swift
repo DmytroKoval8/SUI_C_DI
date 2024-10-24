@@ -54,7 +54,7 @@ struct MovieDetailsView: View {
             }
         }
         .alert(item: $viewModel.error) { error in
-            Alert(title: Text("Error"), message: Text(error.localizedDescription), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Error"), message: Text(error.error.localizedDescription), dismissButton: .default(Text("OK")))
         }
     }
 }

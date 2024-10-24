@@ -8,12 +8,18 @@
 import Combine
 import UIKit
 
+struct IdentifiableError: Identifiable {
+    let id = UUID()  // Unique ID for SwiftUI
+    var error: Error  // Your error object
+}
+
+
 class MovieDetailsViewModel: ObservableObject {
     let movie: Movie
 
     @Published var poster: UIImage?
     @Published var cast: [MovieCastMember] = []
-    @Published var error: Error?
+    @Published var error: IdentifiableError?
 
     private let service: MovieDetailsServicing
 
@@ -29,7 +35,7 @@ class MovieDetailsViewModel: ObservableObject {
                 case .success(let poster):
                     self?.poster = poster
                 case .failure(let error):
-                    self?.error = error
+                    self?.error?.error = error
                 }
             }
         }
@@ -40,7 +46,7 @@ class MovieDetailsViewModel: ObservableObject {
                 case .success(let creditsResponse):
                     self?.cast = creditsResponse.cast
                 case .failure(let error):
-                    self?.error = error
+                    self?.error?.error = error
                 }
             }
         }
