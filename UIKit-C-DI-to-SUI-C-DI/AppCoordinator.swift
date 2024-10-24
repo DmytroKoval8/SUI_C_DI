@@ -12,6 +12,13 @@ class AppCoordinator: ObservableObject {
     let moviesService: MoviesServicing
     let movieDetailsService: MovieDetailsServicing
 
+    enum AppConfiguration {
+        case live
+        case mock
+    }
+
+    let appConfiguration: AppConfiguration = .live
+    
     init() {
         switch appConfiguration {
         case .live:
